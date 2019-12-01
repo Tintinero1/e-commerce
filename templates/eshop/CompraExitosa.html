@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Compra Exitosa{% endblock %}
+
+{% block content %}
+
+
+	<table class="table table-stripped">
+		<th class="table-primary"><center><h4><strong>Nombre</strong></h4></center></th>
+		<th class="table-primary"><h4><strong>Descripcion</strong></h4></th>
+		<th class="table-primary"><center><h4><strong>Precio</strong></h4></center></th>
+		<th class="table-primary"><center><h4><strong>Imagen</strong></h4></center></th>
+		{% for obj in allproductsPurchased %}
+			<tr>
+				<td><center><h3>{{ obj.name }}</h3></center></td>
+				<td><h4>{{ obj.content }}</h4></td>
+				<td><center><h2>${{ obj.precio }} Dlls</h2></center></td>
+				<td><center><img src="{{ obj.photo.url }}" width="200" height="200" alt="{{ obj.name }}"></center></td>
+
+
+
+			</tr>
+
+
+		{% endfor %}
+
+
+	</table>
+	<br>
+	<br>
+	<center><h1>¡Gracias por su compra!</h1></strong></center><strong>
+	<center><h3>Un recibo de su compra fue enviado a <a href="#">{{request.user.email}}</a></h3></center>
+	<br>
+	<br>
+	<center><h3>No olvide dejar un comentario respecto a su producto si este fue de su agrado, realmente nos ayuda mucho.</h3></center>
+	<br>
+	<br>
+	<center><img src="/media/proyecto/bb.jpg" width="600" height="600" alt="smileyblueballoon"></center>
+
+	<div>
+	<img src="/media/proyecto/historialcompras.png" width="50" height="50" alt="historial de compras"><a href="{% url 'eshop_app:productoscomprados' %}" class="btn btn-primary">Historial de Productos</a>
+	</div>
+
+
+
+<table class="table table-stripped">
+		<th class="table-dark">&nbsp;</th>
+	</table>
+{% endblock %}

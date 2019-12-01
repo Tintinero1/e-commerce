@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Delete Credit Card{% endblock %}
+
+{% block content %}
+<center>
+		<form method="POST">
+			{% csrf_token %}
+			<br>
+			<h1>¿Realmente quieres Borrar esta Tarjeta?</h1>
+			<table class="table table-striped table-bordered table-sm">
+				<th class="table-primary">Usuario</th>
+				<th class="table-primary">Numero de Tarjeta</th>
+				<th class="table-primary"></th>
+					<tr >
+						<td class="table-dark">{{ queryCC.user }}</td>
+						<td class="table-dark">{{ queryCC.CardNumber }}</td>
+						<td class="table-warning"><center><img src="/media/proyecto/tarjeta.png" height="50" width="50"></center></td>
+					</tr>
+			</table>
+
+			<br>
+			<button type="submit" class="btn btn-danger">&nbsp;&nbsp;&nbsp;&nbsp;Delete&nbsp;&nbsp;&nbsp;&nbsp;</button>&nbsp;
+			<a href="{% url 'eshop_app:comprar' %}" class="btn btn-primary" type="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+
+	</form>
+</center>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+	<center><img src="/media/proyecto/alerta.png" width="200" height="200"></center>
+
+	
+{% endblock %}

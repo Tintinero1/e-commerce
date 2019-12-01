@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Success{% endblock %}
+
+{% block content %}
+
+<h1>Compra Exitosa</h1>
+
+<table class="table table-stripped">
+	<th class="table-primary"><center><h4><strong>Nombre</strong></h4></center></th>
+	<th class="table-primary"><h4><strong>Descripcion</strong></h4></th>
+	<th class="table-primary"><center><h4><strong>Precio</strong></h4></center></th>
+	<th class="table-primary"><center><h4><strong>Imagen</strong></h4></center></th>
+	{% for producto in queryPRODUCTOS %}
+		<tr>
+			<td><center><h3>{{ producto.name }}</h3></center></td>
+			<td><h4>{{ producto.content }}</h4></td>
+			<td><center><h2>${{ producto.precio }} Dlls</h2></center></td>
+			<td><center><img src="{{ producto.photo.url }}" width="200" height="200" alt="{{ producto.name }}"></center></td>
+			
+
+
+		</tr>
+
+
+	{% endfor %}
+
+
+</table>
+<br>
+<h3 style="text-align:right;"> {{message}} &nbsp;&nbsp; </h3>
+&nbsp;&nbsp;<a href="{% url 'eshop_app:index'%}" class="btn btn-primary">Volver al inicio</a>&nbsp;&nbsp;
+<br>
+<br>
+
+
+
+	
+
+
+
+
+
+<table class="table table-stripped">
+		<th class="table-dark">&nbsp;</th>
+	</table>
+{% endblock %}

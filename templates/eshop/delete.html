@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}DeleteTweet{% endblock %}
+
+{% block content %}
+<center>
+		<form method="POST">
+			{% csrf_token %}
+			<br>
+			<h1>¿Realmente quieres Borrar este comentario?</h1>
+			<h3>"{{ tweet.Comentar }}"</h3>
+			<br>
+			<button type="submit" class="btn btn-danger">&nbsp;&nbsp;&nbsp;&nbsp;Delete&nbsp;&nbsp;&nbsp;&nbsp;</button>&nbsp;
+			<a href="{% url 'eshop_app:producto' id2 %}" class="btn btn-primary" type="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+
+	</form>
+</center>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+	<center><img src="/media/proyecto/alerta.png" width="200" height="200"></center>
+
+	
+{% endblock %}

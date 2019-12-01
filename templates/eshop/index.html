@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Eshop{% endblock %}
+
+
+{% block content %}
+{% if request.user.is_authenticated %}
+	
+{% else %}
+<big>
+<strong>
+	<form method="POST">
+		{% csrf_token %}
+		{{form}}
+		&nbsp;&nbsp;
+		<button type="submit" class="btn btn-primary">Login</button>
+
+	</form>	
+	{{ message }}
+	{{ username }}
+</strong>
+</big>
+{% endif %}	
+<center><h1>¡Eshop Commerce!</h1></center>
+<table class="table table-stripped table-hover">
+	<th class="table-primary"><center><strong><h4>Productos disponibles:</h4></strong></center></th>
+	<th class="table-primary"><center><strong><h4>Ver producto</h4></strong></center></th>
+	<th class="table-primary"><center><strong><h4>Imagen</h4></strong></center></th>
+	<th class="table-primary"><center><strong><h4>Calificacion</h4></strong></center></th>
+		{% for s in stars %}
+		<tr>
+			<td><center><h3>{{ s.producto.name }}</h3></center></td>
+			<td><center><h4><a href="{% url 'eshop_app:producto' s.producto.id %}">Ver</a></h4></center></td>
+			<td><center><img src="{{ s.producto.photo.url }}" width="100" height="100" alt="{{ s.producto.name }}"></center></td>
+			
+			<td><center><big style="vertical-align: text-top;"><strong>{{s.calificacion}}&nbsp;&nbsp;&nbsp;&nbsp;</strong></big><img style="text-align:left;" align="top" src="/media/proyecto/estrella1.jpg" height="25" width="25"></center></td>
+
+		</tr>
+		{% endfor %}
+</table>
+
+
+{% endblock %}
+

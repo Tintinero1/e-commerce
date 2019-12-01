@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Pagar{% endblock %}
+
+{% block content %}
+
+{% if flag == True%}
+	
+
+	<table class="table table-striped table-bordered table-sm">
+	<th class="table-primary">Usuario</th>
+	<th class="table-primary">Numero de Tarjeta</th>
+	<th class="table-primary">Accion</th>
+	<th class="table-primary"></th>
+	{% for producto in queryCARD %}
+		<tr >
+			<td class="table-dark">{{ producto.user }}</td>
+			<td class="table-dark">{{ producto.CardNumber }}</td>
+			<td class="table-dark"><p><a href="{% url 'eshop_app:deleteCC' producto.id %}" class="btn btn-primary">Borrar Tarjeta</a></p></td>
+			<td class="table-warning"><center><img src="/media/proyecto/tarjeta.png" height="50" width="50"></center></td>
+		</tr>
+	{% endfor %}
+</table>
+
+
+{% else %}
+	<center>
+	<h4>Porfavor ingrese su Tarjeta</h4>
+	{% include "eshop/form_CreditCard.html" with form=CreditCard_form action_url=create_url btn_title="Agregar Tarjeta"%}
+	</center>
+{% endif %}
+
+<h1>Articulos a comprar:</h1>
+	<table class="table table-stripped">
+		<th><center><h4><strong>Nombre</strong></h4></center></th>
+		<th><h4><strong>Descripcion</strong></h4></th>
+		<th><center><h4><strong>Precio</strong></h4></center></th>
+		<th><center><h4><strong>Imagen</strong></h4></center></th>
+		{% for producto in queryPRODUCTOS %}
+			<tr>
+				<td><center><h3>{{ producto.name }}</h3></center></td>
+				<td><h4>{{ producto.content }}</h4></td>
+				<td><center><h2>${{ producto.precio }} Dlls</h2></center></td>
+				<td><center><img src="{{ producto.photo.url }}" width="200" height="200" alt="{{ producto.name }}"></center></td>
+
+			</tr>
+		{% endfor %}
+	</table>
+
+<h1 style="text-align:right;">Total: {{total}}</h1>
+&nbsp;&nbsp;<a href="{% url 'eshop_app:index'%}" class="btn btn-primary">Seguir Comprando</a>
+{% if flag == True%}
+	{% include "eshop/form_purchased.html" with form=purchased_form action_url=carrito_url btn_title="Agregar al carrito"%}
+{% endif %}
+<br>
+<br>
+
+<table class="table table-stripped">
+		<th class="table-dark">&nbsp;</th>
+	</table>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'eshop_app:index' %}">E-Shop</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'eshop_app:index' %}">Inicio <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'eshop_app:secciones' %}">Secciones</a>
+      </li>
+      {% if user.is_superuser%}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Herramientas Admin
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'eshop_app:agregarproducto' %}">Agregar Producto</a>
+          <a class="dropdown-item" href="{% url 'eshop_app:agregarseccion' %}">Agregar Seccion</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Proximamente mas opciones</a>
+        </div>
+      </li>
+      {% endif %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'eshop_app:productoscomprados' %}">Historial de Compras</a>
+      </li>
+      <!--
+      {% if user.is_superuser%}
+      <li class="nav-item">
+        <a class="btn btn-link" href="{% url 'eshop_app:agregarproducto' %}">Agregar Producto</a>
+      </li>
+      <li class="nav-item">
+        <a class="btn btn-link" href="{% url 'eshop_app:agregarseccion' %}">Agregar Seccion</a>
+      </li>
+      {% else %}
+      {% endif %}
+    -->
+
+    </ul>
+    <form class="form-inline my-2 my-lg-0" role="search" method="GET" action="{% url 'eshop_app:search' %}">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value="{{request.GET.q}}" name="q">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>&nbsp;&nbsp;
+      {% if request.user.is_authenticated %}
+      &nbsp;&nbsp;&nbsp;&nbsp;Signed as {{ request.user }}&nbsp;&nbsp; <br>
+      	{% if lol > 0 %}
+      		<a  href="{% url 'eshop_app:carrito' 1 %}" class="btn btn-primary"> "{{lol}}" en Carrito</a>&nbsp;&nbsp;
+     	 {% else %}
+     	 	<a  href="{% url 'eshop_app:carrito' 1 %}" class="btn btn-primary">Carrito</a>&nbsp;&nbsp;
+     	 {% endif %}
+      <a href="{% url 'eshop_app:logout' %}?next=/" class="btn btn-info">Logout</a>
+    {% else %}
+    <a  href="{% url 'eshop_app:carrito' 1 %}" class="btn btn-primary">Carrito</a>&nbsp;&nbsp;
+      <a href="{% url 'eshop_app:index' %}" class="btn btn-link">Login</a>
+      or else
+      <a href="{% url 'eshop_app:signup' %}" class="btn btn-link">Signup</a>
+      
+    {% endif %}
+    
+
+    </form>
+  </div>
+</nav>
+
+</head>

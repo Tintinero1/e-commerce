@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Eshop - Promociones{% endblock %}
+
+
+{% block content %}
+
+
+
+<table class="table table-stripped table-hover">
+	<th class="table-primary" style="text-align:left;"> </th>
+	<th class="table-primary" style="text-align:left;"><strong><h4>Secciones</h4></strong></th>
+		{% for s in stars %}
+		<tr>
+			
+
+			<td><big style="vertical-align: text-top;"><strong>&nbsp;&nbsp;&nbsp;&nbsp;</strong></big><img style="text-align:right;" align="top" src="/media/proyecto/seccion.jpg" height="25" width="25"></td>
+			<td><h3 style="text-align:left;">{{ s.seccion }}</h3></td>
+
+		</tr>
+		{% endfor %}
+</table>
+<br>
+<br><br>
+<center><h1>Usted puede buscar cada una de estas secciones en la barra de busqueda de EShop!</h1>
+	</center>
+{% endblock %}
+

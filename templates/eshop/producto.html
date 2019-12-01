@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+
+<table class="table table-stripped table-bordered">
+	<th class="table-primary"><center><h4><strong>Nombre</strong></h4></center></th>
+	<th class="table-primary"><h4><strong>Descripcion</strong></h4></th>
+	<th class="table-primary"><center><h4><strong>Precio</strong></h4></center></th>
+	<th class="table-primary"><center><h4><strong>Imagen</strong></h4></center></th>
+	{% for producto in objects %}
+		<tr>
+			<td><center><h3>{{ producto.name }}</h3></center></td>
+			<td><h4>{{ producto.content }}</h4></td>
+			<td><center><h2>${{ producto.precio }} Dlls</h2></center></td>
+			<td><center><img src="{{ producto.photo.url }}" width="200" height="200" alt="{{ producto.name }}"></center></td>
+
+		</tr>
+	{% endfor %}
+
+</table>
+
+
+
+{% if flag == False %}
+	<p><img src="/media/proyecto/carrito.jpg" width="50" height="50" alt="carrito" style="">{% include "eshop/form_carrito.html" with form=carrito_form action_url=carrito_url btn_title="Agregar al carrito"%}</p>
+{% else %}
+	<h4>Este producto ya esta en el carrito</h4>
+	<a href="{% url 'eshop_app:carrito' validator.id %}" class="btn btn-primary">Ver en el carrito</a>
+{% endif %}
+
+
+	<div class="row">
+		<ul id="wsTweets">
+			
+		</ul>
+
+	</div>
+	
+	<br>
+	<table class= "table table-condensed">
+		<th class="table-warning"><center><strong><h5>Usuario</h5></strong></center></th>
+		<th class="table-warning"><center><strong><h5>Comentario</h5></strong></center></th>
+		<th class="table-warning"><center><strong><h5>Publicado</h5></strong></center></th>
+		<th class="table-warning"><center><strong><h5>Acciones</h5></strong></center></th>
+		<th class="table-warning"><center><strong><h5>---</h5></strong></center></th>
+		<th class="table-warning"><center><strong><h5>Estrellas</h5></strong></center></th>
+
+		{% for tweet in querysetComments %}
+			<tr>
+				<td><center>{{ tweet.user }}</center></td>
+				<td><center>{{ tweet.Comentar }}</center></td>
+				<td><center>{{ tweet.timestamp | timesince }} ago</center></td>
+				{% if tweet.user == us %}<td><center><a href="{% url 'eshop_app:update' tweet.id tweet.producto %}" class="btn btn-link">Update</a></center></td>
+				{% else %}
+				<td></td>
+				{% endif %}
+				{% if tweet.user == us %}<td><center><p><a href="{% url 'eshop_app:delete' tweet.id tweet.producto %}">Delete</a></p></center></td>
+				{% else %}
+				<td></td>
+				{% endif %}
+				<td ><center><big style="vertical-align: text-top;"><strong>{{tweet.estrellas}}&nbsp;&nbsp;&nbsp;&nbsp;</strong></big><img style="text-align:left;" align="top" src="/media/proyecto/estrella1.jpg" height="25" width="25"></center></td>
+			</tr>
+		{% endfor %}
+		
+	</table>
+	
+	
+	
+
+	{% if request.user.is_authenticated %}
+		{% include "eshop/form_create.html" with form=create_form action_url=create_url btn_title="Publicar"%}
+
+	{% else %}
+	<br>
+		<center><h1>Porfavor Inicia sesion para comentar</h1></center>
+	{% endif %}
+{% endblock %}
